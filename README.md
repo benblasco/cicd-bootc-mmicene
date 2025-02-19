@@ -7,19 +7,19 @@ For RHEL, this example uses an activation key to get access to a subscription an
 To use packages from the RHEL repositories, the builder will need to have subscription information available. This workflow will register the container, execute the build, and then unregister as a 
 final step. You will only be using the subscription for the duration of the build. To use subscription-manager in a pipieline like this, it's easiest to use an activation key. If you don't have a subscription already, the [No-cost RHEL for developers subscription](https://developers.redhat.com/products/rhel/download) is a good option.
 
-If you aren't familiar with actionvation keys, from the docs:
+If you aren't familiar with activation keys, from the docs:
 > An activation key is a preshared authentication token that enables authorized users to register and auto-configure systems. Running a registration command with an activation key and organization  ID combination, instead of a username and password combination, increases security and facilitates automation.
 
 [Creating an activation key in the console](https://docs.redhat.com/en/documentation/subscription_central/1-latest/html/getting_started_with_activation_keys_on_the_hybrid_cloud_console/assembly-creating-managing-activation-keys#proc-creating-act-keys-console_)
 
-Create 2 secrets in the repo
+Create 2 secrets in the repo. The easiest way to do this is via Settings -> Secrets and variables -> Actions -> New repository secret
 
 Organization ID as *RHT_ORGID*
 
 Activation key as *RHT_ACT_KEY*
 
 ## Getting access to the base image
-Ublike UBI, the bootc base image does require an account to access since this is a full RHEL host. To log into the registry during a pipeline build or other automation, you can [create a regitry service account}(https://access.redhat.com/RegistryAuthentication#registry-service-accounts-for-shared-environments-4) in tne customer portal.
+Unlike UBI, the bootc base image does require an account to access since this is a full RHEL host. To log into the registry during a pipeline build or other automation, you can [create a registry service account](https://access.redhat.com/RegistryAuthentication#registry-service-accounts-for-shared-environments-4) in tne customer portal.
 
 ### Token Information
 Create 1 var and 1 secret in the repo
@@ -51,6 +51,6 @@ Add the following step as the first step in the job (before the checkout):
 ```
 On a test build, this removed about 8GB of tools on the host. Since this job runs in a nested UBI container which needs all of the tools made available in it, we aren't using any of the tools in the host cache. 
 
-### Crrent build status
+### Current build status
 [![Fedora 40 bootc image workflow](https://github.com/nzwulfin/cicd-bootc/actions/workflows/build_fedora_bootc.yml/badge.svg)](https://github.com/nzwulfin/cicd-bootc/actions/workflows/build_fedora_bootc.yml)
 [![RHEL 9 bootc image workflow](https://github.com/nzwulfin/cicd-bootc/actions/workflows/build_rhel_bootc.yml/badge.svg)](https://github.com/nzwulfin/cicd-bootc/actions/workflows/build_rhel_bootc.yml)
