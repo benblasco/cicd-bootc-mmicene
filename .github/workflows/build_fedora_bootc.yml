@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       IMAGE_NAME: f40-cicd-bootc
-      REGISTRY: ghcr.io/nzwulfin
+      REGISTRY: ghcr.io/benblasco
    
     steps:
       - name: Clone the repository
