@@ -5,7 +5,7 @@ on:
     paths:
       - 'fedora/**'
     branches:
-      - main
+      - bblasco-testing
 
 jobs:
   build:
